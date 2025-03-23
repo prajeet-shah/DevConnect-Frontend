@@ -3,7 +3,8 @@ import React from "react";
 const UserCard = ({ user }) => {
   console.log(user);
 
-  const { firstName, lastName, photoUrl, skills, about, gender } = user;
+  const { firstName, lastName, photoUrl, skills, about, gender, age } = user;
+
   return (
     <div>
       <div className="card bg-base-300 w-96 shadow-sm">
@@ -11,12 +12,15 @@ const UserCard = ({ user }) => {
           <img className="w-full" src={user.photoUrl} alt="photoUrl" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{firstName + " " + lastName}</h2>
+          {<h2 className="card-title">{firstName + " " + lastName}</h2>}
+          {age && gender && <h2 className="text-xl">{age + " , " + gender}</h2>}
           {about && <h2 className="card-title">{about}</h2>}
-         
+
           <div className="card-actions justify-center my-2">
             <button className="btn btn-primary text-xl mx-2">Ignore</button>
-            <button className="btn btn-secondary text-xl mx-2">Interested</button>
+            <button className="btn btn-secondary text-xl mx-2">
+              Interested
+            </button>
           </div>
         </div>
       </div>
