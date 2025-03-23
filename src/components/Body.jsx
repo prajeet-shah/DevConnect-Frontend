@@ -20,11 +20,12 @@ const Body = () => {
 
       dispatch(addUser(res.data));
       navigate("/feed");
-      console.log(res);
+      // console.log(res);
     } catch (err) {
-      dispatch(removeUser());
-      navigate("/login");
-      console.log(err.message);
+      if (err.response.status === 401) {
+        dispatch(removeUser());
+        navigate("/login");
+      }
     }
   };
 

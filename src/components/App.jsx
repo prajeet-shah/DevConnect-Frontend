@@ -5,7 +5,6 @@ import Profile from "./Profile";
 import Feed from "./Feed";
 import { Provider } from "react-redux";
 import appStore from "../utils/appStore";
-import Logout from "./Logout";
 
 function App() {
   return (
@@ -16,7 +15,7 @@ function App() {
             <Route path="/" element={<Body />}>
               <Route path="/feed" element={<Feed />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/logout" element={<Logout />} />
+
               <Route path="/profile" element={<Profile />} />
             </Route>
           </Routes>
