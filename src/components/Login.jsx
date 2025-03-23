@@ -9,9 +9,14 @@ import { useNavigate } from "react-router";
 const Login = () => {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  setTimeout(() => {
+    setError("");
+  }, 6000);
   const handleLogin = async (e) => {
     e.preventDefault();
     console.log("Email:", emailId, "Password:", password);
@@ -32,7 +37,7 @@ const Login = () => {
       dispatch(addUser(res.data.user));
       navigate("/feed");
     } catch (err) {
-      console.log(err);
+      setError(err.response.data.message);
     }
   };
 
@@ -70,7 +75,7 @@ const Login = () => {
               required
             />
           </div>
-
+          <p>{error}</p>
           <div className="flex justify-between items-center text-sm text-gray-600">
             <label className="flex items-center space-x-2">
               <input type="checkbox" className="accent-blue-500" />
