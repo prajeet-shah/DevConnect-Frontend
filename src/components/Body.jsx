@@ -7,7 +7,7 @@ import { addUser, removeUser } from "../utils/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Body = () => {
-  console.log("re-render body");
+  // console.log("re-render body");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
@@ -25,6 +25,7 @@ const Body = () => {
       if (err.response.status === 401) {
         dispatch(removeUser());
         navigate("/login");
+        console.log(err.response.data.message);
       }
     }
   };
