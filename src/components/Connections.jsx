@@ -21,6 +21,7 @@ const Connections = () => {
   }, []);
 
   if (!connections) return;
+  if (connections.length <= 0) return <h1>No Connections found</h1>;
 
   return (
     <div>

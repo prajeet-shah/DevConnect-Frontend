@@ -21,14 +21,15 @@ const Feed = () => {
   };
 
   useEffect(() => {
-    !feedData && getFeed();
-  }, []);
+    if (!feedData || feedData.length === 0) {
+      getFeed();
+    }
+  }, [feedData]);
 
-  return (
-    <div className="flex justify-center my-10">
-      {feedData && <UserCard user={feedData[2]} />}
-    </div>
-  );
+  if (!feedData) return;
+  if (feedData <= 0) return <h1> no user found in the feed</h1>;
+
+  return <div className="flex justify-center my-10">{feedData && <UserCard user={feedData[0]} />}</div>;
 };
 
 export default Feed;
