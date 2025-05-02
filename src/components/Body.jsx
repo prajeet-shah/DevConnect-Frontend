@@ -22,7 +22,7 @@ const Body = () => {
       navigate("/feed");
       // console.log(res);
     } catch (err) {
-      if (err.response.status === 401) {
+      if (err.response.status === 400) {
         dispatch(removeUser());
         navigate("/login");
         console.log(err.response.data.message);
