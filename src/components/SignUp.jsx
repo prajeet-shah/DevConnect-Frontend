@@ -26,8 +26,8 @@ const SignUp = () => {
         },
         { withCredentials: true }
       );
-      console.log(res.data);
-      dispatch(addUser(res.data));
+      console.log(res.data.user);
+      dispatch(addUser(res.data.user));
       navigate("/profile");
     } catch (err) {
       console.log(err.message);
