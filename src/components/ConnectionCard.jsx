@@ -1,21 +1,21 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
 const ConnectionCard = ({ connections }) => {
-  const { firstName, lastName, photoUrl, about, age, gender } = connections;
+  const { firstName, lastName, photoUrl, about } = connections;
+
   return (
-    <div>
-    
-    
-      <div className="flex justify-start items-center w-1/2 border border-blak rounded-lg bg-gray-200 mx-auto my-3 shadow-md">
+    <div className="w-[95%] md:w-3/4 lg:w-1/2 mx-auto my-3 p-4 bg-gray-100 rounded-lg shadow-md">
+      <div className="flex flex-col md:flex-row items-center gap-4">
         <img
-          className="w-20 h-20 rounded-full mx-2 "
+          className="w-20 h-20 rounded-full object-cover"
           src={photoUrl}
-          alt="photoUrl"
+          alt="User"
         />
-        <div>
-          <h1 className="text-2xl">{firstName + " " + lastName}</h1>
-          <p className="text-xl">{about}</p>
+        <div className="text-center md:text-left flex-1">
+          <h1 className="text-xl font-semibold">
+            {firstName + " " + lastName}
+          </h1>
+          <p className="text-gray-700">{about}</p>
         </div>
       </div>
     </div>

@@ -8,11 +8,11 @@ import ConnectionCard from "./ConnectionCard";
 const Connections = () => {
   const dispatch = useDispatch();
   const connections = useSelector((store) => store.connections);
+
   const fetchConnections = async () => {
     const res = await axios.get(BASE_URL + "/user/connections", {
       withCredentials: true,
     });
-    console.log(res.data.data);
     dispatch(addConnections(res.data.data));
   };
 
@@ -20,14 +20,12 @@ const Connections = () => {
     fetchConnections();
   }, []);
 
-  if (!connections) return;
-  if (connections.length <= 0) return <h1>No Connections found</h1>;
+  if (!connections || connections.length <= 0)
+    return <h1 className="text-center mt-10 text-xl">No Connections found</h1>;
 
   return (
-    <div>
-      <h1 className="flex justify-center my-10 font-bold text-3xl">
-        Connections
-      </h1>
+    <div className="px-4">
+      <h1 className="text-center my-8 text-3xl font-bold">Connections</h1>
       {connections.map((connection) => (
         <ConnectionCard key={connection._id} connections={connection} />
       ))}
