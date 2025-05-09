@@ -8,6 +8,7 @@ import appStore from "../utils/appStore";
 import Connections from "./Connections";
 import Requests from "./Requests";
 import SignUp from "./SignUp";
+import Chat from "./Chat";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/connections" element={<Connections />} />
               <Route path="/requests" element={<Requests />} />
+              <Route path="/chat/:targetUserId" element={<Chat />} />
             </Route>
           </Routes>
         </BrowserRouter>

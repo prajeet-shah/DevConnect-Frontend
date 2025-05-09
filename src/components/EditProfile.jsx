@@ -124,7 +124,7 @@ const EditProfile = ({ user }) => {
             </button>
           </form>
         </div>
-        <div className="mx-2 hidden">
+        <div className="mx-2 md:block hidden">
           <UserCard
             user={{ firstName, lastName, age, photoUrl, about, gender }}
           />

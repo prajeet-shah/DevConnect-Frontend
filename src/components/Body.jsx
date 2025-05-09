@@ -19,7 +19,15 @@ const Body = () => {
       });
 
       dispatch(addUser(res.data));
-      navigate("/feed");
+
+      // Navigate to /feed ONLY if on homepage or login/signup
+      if (
+        location.pathname === "/" ||
+        location.pathname === "/login" ||
+        location.pathname === "/signup"
+      ) {
+        navigate("/feed");
+      }
       // console.log(res);
     } catch (err) {
       if (err.response.status === 400) {

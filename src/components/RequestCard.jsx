@@ -29,7 +29,9 @@ const RequestCard = ({ requests }) => {
         />
 
         <div className="flex-1 text-center md:text-left">
-          <h1 className="text-xl font-semibold">{firstName + " " + lastName}</h1>
+          <h1 className="text-xl font-semibold">
+            {firstName + " " + lastName}
+          </h1>
           <p className="text-gray-700">{about}</p>
         </div>
 

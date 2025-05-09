@@ -8,10 +8,10 @@ const UserCard = ({ user }) => {
   console.log(user);
 
   const dispatch = useDispatch();
-  const { _id, firstName, lastName, photoUrl, skills, about, gender, age } =
-    user;
+  const { _id, firstName, lastName, about, gender, age } = user;
 
   const fetchSendRequest = async (status, requestId) => {
+    if (!user) return;
     let res = await axios.post(
       BASE_URL + "/request/send/" + status + "/" + requestId,
       {},
@@ -22,9 +22,9 @@ const UserCard = ({ user }) => {
     console.log(res.data);
   };
 
-  useEffect(() => {
-    fetchSendRequest();
-  }, []);
+  // useEffect(() => {
+  //   fetchSendRequest();
+  // }, []);
 
   return (
     <div>
