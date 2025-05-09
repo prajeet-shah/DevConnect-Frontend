@@ -11,7 +11,7 @@ const ConnectionCard = ({ connections }) => {
           src={photoUrl}
           alt="User"
         />
-        <div className="text-center md:text-left flex-1">
+        <div className="text-center md:text-left flex-1 text-black">
           <h1 className="text-xl font-semibold">
             {firstName + " " + lastName}
           </h1>

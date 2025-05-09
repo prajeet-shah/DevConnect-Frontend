@@ -28,7 +28,7 @@ const RequestCard = ({ requests }) => {
           alt="User"
         />
 
-        <div className="flex-1 text-center md:text-left">
+        <div className="flex-1 text-center md:text-left text-black">
           <h1 className="text-xl font-semibold">
             {firstName + " " + lastName}
           </h1>
