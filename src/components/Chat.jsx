@@ -9,13 +9,14 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const { targetUserId } = useParams();
-  console.log(targetUserId);
 
   const user = useSelector((store) => store.user);
   const userId = user?._id;
   const firstName = user?.firstName;
 
   const sendMessage = () => {
+    if (!newMessage.trim()) return;
+
     const socket = createSocketConnection();
     socket.emit("sendMessage", {
       firstName,
@@ -27,21 +28,16 @@ const Chat = () => {
     setNewMessage("");
   };
 
-  // load the message here
-
   const fetchChatMessages = async () => {
     const res = await axios.get(BASE_URL + "/chat/" + targetUserId, {
       withCredentials: true,
     });
-    console.log(res?.data?.messages);
 
-    const chatMessages = res.data.messages.map((msg) => {
-      return {
-        firstName: msg?.senderId?.firstName,
-        lastName: msg?.senderId?.lastName,
-        text: msg?.text,
-      };
-    });
+    const chatMessages = res.data.messages.map((msg) => ({
+      firstName: msg?.senderId?.firstName,
+      lastName: msg?.senderId?.lastName,
+      text: msg?.text,
+    }));
 
     setMessages(chatMessages);
   };
@@ -52,13 +48,10 @@ const Chat = () => {
 
   useEffect(() => {
     const socket = createSocketConnection();
-    // as soon as the page reloaded, the socket connection is made and joinChat event is emitted
     socket.emit("joinChat", { firstName, userId, targetUserId });
 
     socket.on("messageReceived", ({ firstName, text }) => {
       setMessages((prev) => [...prev, { firstName, text }]);
-      console.log(firstName + " " + newMessage);
-      console.log(messages);
     });
 
     return () => {
@@ -67,36 +60,45 @@ const Chat = () => {
   }, [userId, targetUserId]);
 
   return (
-    <div className=" bg-gray-300 w-1/3 m-auto my-10 border border-black h-96 relative">
-      <h1 className="border border-black">chat</h1>
-      {/**messsage */}
-      <div className="mx-2 h-[75%] overflow-y-auto scroll">
-        {messages.map((msg, index) => {
-          return (
-            <div key={index}>
-              <div className="chat-header">
+    <div className="bg-gray-100 min-h-screen p-4 flex justify-center items-center">
+      <div className="w-full max-w-screen-sm h-[80vh] bg-white rounded-xl shadow-md flex flex-col overflow-hidden">
+        <div className="p-4 bg-blue-600 text-white text-xl font-semibold">
+          Chat
+        </div>
+
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto px-4 py-2 space-y-2">
+          {messages.map((msg, index) => (
+            <div
+              key={index}
+              className={`chat ${
+                user.firstName === msg.firstName ? "chat-end" : "chat-start"
+              }`}
+            >
+              <div className="chat-header text-sm font-medium mb-1">
                 {msg.firstName}
-                {/*<time className="text-xs opacity-50">12:46</time>*/}
               </div>
-              <div className="chat-bubble">{msg.text}</div>
-              {/*<div className="chat-footer opacity-50">Seen at 12:46</div>*/}
+              <div className="chat-bubble text-base">{msg.text}</div>
             </div>
-          );
-        })}
-      </div>
-      <div className="absolute bottom-0 w-full bg-white">
-        <input
-          value={newMessage}
-          onChange={(e) => {
-            setNewMessage(e.target.value);
-          }}
-          className="w-[81%] bg-gray-100 h-8 rounded-lg"
-          type="text"
-          placeholder="message here"
-        />
-        <button className="btn btn-secondary px-11 " onClick={sendMessage}>
-          send
-        </button>
+          ))}
+        </div>
+
+        {/* Input */}
+        <div className="p-3 border-t flex items-center gap-2 bg-gray-50">
+          <input
+            type="text"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            placeholder="Type your message..."
+            className="flex-1 p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-300"
+          />
+          <button
+            onClick={sendMessage}
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          >
+            Send
+          </button>
+        </div>
       </div>
     </div>
   );
