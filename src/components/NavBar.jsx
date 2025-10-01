@@ -32,11 +32,28 @@ const NavBar = () => {
   // console.log(user);
   return (
     <div className="navbar bg-secondary shadow-md">
-      <div className="flex-1">
+      <div className="flex">
         <Link to={user ? "/feed" : "/login"} className="btn btn-ghost text-xl">
           DevConnect
         </Link>
       </div>
+      {user && (
+        <div className="flex-1 mx-7">
+          <nav>
+            <ul className="flex ">
+              <Link to={"/feed"}>
+                <li className="ml-36 mr-10 text-xl font-semibold">Home</li>
+              </Link>
+              <Link to={"/connections"}>
+                <li className="mx-10 text-xl font-semibold">Connections</li>
+              </Link>
+              <Link to={"/requests"}>
+                <li className="mx-10 text-xl font-semibold">Requests</li>
+              </Link>
+            </ul>
+          </nav>
+        </div>
+      )}
       {user ? (
         <div className="flex">
           <div className="font-bold mx-2 text-xl hidden md:block">
@@ -62,7 +79,6 @@ const NavBar = () => {
                   className="justify-between md:text-base text-sm"
                 >
                   Profile
-                  
                 </Link>
               </li>
               <li>
