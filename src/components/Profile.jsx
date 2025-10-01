@@ -10,7 +10,7 @@ const Profile = () => {
       let res = await axios.get(BASE_URL + "/profile/view", {
         withCredentials: true,
       });
-      console.log(res.data);
+      //console.log(res.data);
       setUserData(res.data);
     } catch (err) {
       console.log(err.message);
