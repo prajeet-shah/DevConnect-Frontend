@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/feedSlice";
 import UserCard from "./UserCard";
 
+
 const Feed = () => {
   const dispatch = useDispatch();
 
@@ -30,8 +31,10 @@ const Feed = () => {
   if (feedData <= 0) return <h1> no user found in the feed</h1>;
 
   return (
-    <div className="flex justify-center my-10">
-      {feedData && <UserCard user={feedData[0]} />}
+    <div className="">
+      <div className="flex justify-center my-10">
+        {feedData && <UserCard user={feedData[0]} />}
+      </div>
     </div>
   );
 };

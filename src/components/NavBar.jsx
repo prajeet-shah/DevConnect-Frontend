@@ -38,9 +38,9 @@ const NavBar = () => {
         </Link>
       </div>
       {user && (
-        <div className="flex-1 mx-7">
+        <div className="flex-1 mx-7 ">
           <nav>
-            <ul className="flex ">
+            <ul className="flex hidden md:flex lg:flex">
               <Link to={"/feed"}>
                 <li className="ml-36 mr-10 text-xl font-semibold">Home</li>
               </Link>

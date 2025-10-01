@@ -9,6 +9,7 @@ import Connections from "./Connections";
 import Requests from "./Requests";
 import SignUp from "./SignUp";
 import Chat from "./Chat";
+import ForgetPassword from "./ForgetPassword";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               <Route path="/feed" element={<Feed />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
+              <Route path="/forgetpassword" element={<ForgetPassword />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/connections" element={<Connections />} />
               <Route path="/requests" element={<Requests />} />
